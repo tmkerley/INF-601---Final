@@ -7,4 +7,6 @@ class device:
         self.broswer
         self.uptime
         self.powerDraw
+        self.core
+        self.threads
     pass

@@ -3,7 +3,7 @@
 # Fall 2022
 # Final Project
 
-import nmap3
+import nmap
 
 # My defined functions and classes
 import kerleyFunctions.py as kF
@@ -15,7 +15,21 @@ def Main():
     if not kF.permission():
         exit
     
-    nmap = nmap3.Nmap()
+    # nmap scans for local network
+    # id gateway
+    # id network mask
+    # scan ips in mask
+    # pull info on active ips
+    # check port XXXX for any active client noise
+    # id devices that are mobile
+    # id devices that are missing client file
+    # create network map
+    # load local host web app
+    # show network and device information
+
+
+
+    nm = nmap.Nmap()
     # variable for IPv6 status
     targetIPv6 = False
     # assign target IP and host if different

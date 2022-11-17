@@ -1,0 +1,16 @@
+oldidea/
+INF601_Undergraduate_Concentration_Specific_Final_Project_Rubric.pdf
+venv/
+
+*.pyc
+__pycache__/
+
+instance/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+dist/
+build/
+*.egg-info/

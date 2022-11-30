@@ -1,0 +1,47 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
+    
+    <!-- HEAD SECTION -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Muscle Hacker">
+        <meta name="author" content="Thomas Kerley">
+        <meta name="class" content="INF 601 - Fall 2022">
+        <title>{% block title %} {{ site_title }} {% endblock %}</title>
+
+        <!-- STYLE BLOCK SECTION -->
+        <link rel="stylesheet" href="{% block stylesheet %}{% static 'site/css/bootstrap.css' %}{% endblock %}">
+        {% block extrastyle %}{% endblock %}
+        {% block responsive %}
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        {% endblock %}
+        {% block extrahead %}{% endblock %}
+    </head>
+
+    <!-- BODY SECTION -->
+    <body class="{% block bodyclass %}contianer text-center text-bg-dark bg-dark{% endblock %}">
+        
+        <!-- NAV SECTION -->
+        {% block nav_top %}
+            {% include "site/nav_top.html" %}
+        {% endblock %}
+
+        <!-- MAIN SECTION -->
+        {% block main %}
+            
+        {% endblock %}
+
+        <!-- SCRIPT SECTION -->
+        {% block scripts %}
+        <script src="{% static 'site/js/bootstrap.bundle.min.js' %}"></script>
+        {% endblock %}
+        {% block scripts_extra %}
+        {% endblock %}
+
+        <!-- FOOTER SECTION -->
+        {% block footer %}
+            {% include 'site/footer.html' %}
+        {% endblock %}
+    </body>
+</html>

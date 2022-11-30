@@ -20,6 +20,6 @@ from . import views
 app_name = 'site'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path('polls/', include('polls.urls')),
+    path('workouts/', include('workouts.urls')),
     path('admin/', admin.site.urls),
 ]

@@ -8,7 +8,7 @@
         <meta name="description" content="Muscle Hacker">
         <meta name="author" content="Thomas Kerley">
         <meta name="class" content="INF 601 - Fall 2022">
-        <title>{% block title %} {{ site_title }} {% endblock %}</title>
+        <title>{% block title %} MHacker - {{ site_title }} {% endblock %}</title>
 
         <!-- STYLE BLOCK SECTION -->
         <link rel="stylesheet" href="{% block stylesheet %}{% static 'site/css/bootstrap.css' %}{% endblock %}">
@@ -24,7 +24,7 @@
         
         <!-- NAV SECTION -->
         {% block nav_top %}
-            {% include "site/nav_top.html" %}
+            {% include "site/base_nav_top.html" %}
         {% endblock %}
 
         <!-- MAIN SECTION -->
@@ -41,7 +41,7 @@
 
         <!-- FOOTER SECTION -->
         {% block footer %}
-            {% include 'site/footer.html' %}
+            {% include 'site/base_footer.html' %}
         {% endblock %}
     </body>
 </html>

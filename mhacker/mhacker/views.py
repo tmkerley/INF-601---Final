@@ -5,7 +5,7 @@ import datetime
 
 
 class IndexView(generic.ListView):
-    template_name = 'mysite/index.html'
+    template_name = 'mhacker/index.html'
     site_title = 'Main'
 
     def get_queryset(self):

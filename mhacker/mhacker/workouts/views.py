@@ -14,7 +14,11 @@ class IndexView(generic.ListView):
             date_lifted__lte=timezone.now()).order_by('date_lifted')[:10]
     
 class ExerciseView(generic.ListView):
+    template_name = "workouts/exercises.html"
+    site_title = "Exercises"
     pass
 
 class Workout_PlanView(generic.ListView):
+    template_name = "workouts/workout_plan"
+    site_title = "Workout Plan"
     pass

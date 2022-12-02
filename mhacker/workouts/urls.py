@@ -19,6 +19,6 @@ from . import views
 
 app_name = 'workouts'
 urlpatterns = [
-    path('workouts/', views.IndexView.as_view(), name='workouts'),
+    path('', views.IndexView.as_view(), name='workouts_index'),
     path('admin/', admin.site.urls),
 ]

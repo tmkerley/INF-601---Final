@@ -36,40 +36,34 @@ class Exercise(models.Model):
 
 class Workout_goal(models.Model):
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-    number_of_sets = models.IntergerField(default=3)
-    reps_per_set = models.IntergerField(default=6)
-    weight_lifted = models.IntergerField(default=10)
+    number_of_sets = models.IntegerField(default=3)
+    reps_per_set = models.IntegerField(default=6)
+    weight_lifted = models.IntegerField(default=10)
     # time should be hh:mm:ss
     duration_seconds = models.TimeField(default='00:12:30')
     # speed is recorded in mph
     average_speed_mph = models.FloatField(default=7.2)
     # distance is record in miles
     miles_traveled = models.FloatField(default=1.5)
-    
-    # date_lifted = models.DateField
 
-"""
-Workout_actual extends Workout_goal
-"""
-class Workout_actual(Workout_goal):
+
+class Workout_actual(models.Model):
     goal_workout_id = models.ForeignKey(
-        Workout_goal.id, on_delete=models.CASCADE)
+        Workout_goal, on_delete=models.CASCADE)
     time_of_workout = models.DateField('time of workout')
 
     goal_met = models.BooleanField(default=False)
-    """
-    TODO if this extension works, delete this block comment
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-    number_of_sets = models.IntergerField(default=1)
-    reps_per_set = models.IntergerField(default=1)
-    weight_lifted = models.IntergerField(default=5)
+    number_of_sets = models.IntegerField(default=1)
+    reps_per_set = models.IntegerField(default=1)
+    weight_lifted = models.IntegerField(default=5)
     # time should be hh:mm:ss
     duration = models.TimeField(default='00:12:30')
     # speed is recorded in mph
     average_speed = models.FloatField(default=6.0)
     # distance is record in miles
     distance_traveled = models.FloatField(default=1.5)
-    """
+
 
     # counts how many goals were completed.
     def goalCompletion(self):
@@ -88,12 +82,10 @@ class Workout_actual(Workout_goal):
         return now - datetime.timedelta(
             days=14) <= self.time_of_workout <= now
 
-class workout_day(models.Model):
+class Days_workout(models.Model):
     actual_workout = models.ForeignKey(Workout_actual, on_delete=models.CASCADE)
     goal_workout = models.ForeignKey(Workout_goal, on_delete=models.CASCADE)
-    date = datetime.date()
-    time_start = datetime.now()
-    time_end = datetime.now()
+    date_of_workouts = datetime.date
     met_day_goals = models.BooleanField(default=False)
     met_day_goals_percent = models.IntegerField(default=0)
 
@@ -109,16 +101,18 @@ class workout_day(models.Model):
     def goalPercent(actual,goal):
         return goalCompletion(actual,goal) / len(goal)
 
+"""
     met_day_goals_percent = goalCompletion(
         actual_workout,goal_workout) / len(goal_workout)    
     if met_day_goals_percent == 100:
-        met_day_goals = True
+        met_day_goals = True 
+"""
         
 
 
     
 
-class Week(models.Model):
+class Weeks_plan(models.Model):
     pass
     """ num_days_workout = models.IntegerField(default=3)
     num_days_rest = models.IntegerField(default=(7-num_days_workout))
@@ -127,5 +121,5 @@ class Week(models.Model):
     met_week_goal_percent = models.models.IntegerField(default=0) """
 
 
-class Plan(models.Model):
+class Workout_Program(models.Model):
     pass

@@ -19,6 +19,6 @@ from . import views
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path('./workouts/', include('workouts.urls')),
+    path('workouts/', include('workouts.urls')),
     path('admin/', admin.site.urls),
 ]

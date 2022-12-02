@@ -11,4 +11,4 @@ class ExerciseListAdmin(admin.TabularInline):
     equipment = Exercise.equipment
     aType = Exercise.aType
 
-admin.site.register(Exercise, ExerciseListAdmin)
+admin.site.register(Exercise)

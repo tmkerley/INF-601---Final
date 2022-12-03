@@ -24,7 +24,7 @@
         
         <!-- NAV SECTION -->
         {% block nav_top %}
-            {% include "site/base_nav_top.html" %}
+            {% include "workouts\base\base_nav_top.html" %}
         {% endblock %}
 
         <!-- MAIN SECTION -->
@@ -34,14 +34,14 @@
 
         <!-- SCRIPT SECTION -->
         {% block scripts %}
-        <script src="{% static 'site/js/bootstrap.bundle.min.js' %}"></script>
+        {% comment %} <script src="{% static 'base/js/bootstrap.bundle.min.js' %}"></script> {% endcomment %}
         {% endblock %}
         {% block scripts_extra %}
         {% endblock %}
 
         <!-- FOOTER SECTION -->
         {% block footer %}
-            {% include 'site/base_footer.html' %}
+            {% include 'workouts\base\base_footer.html' %}
         {% endblock %}
     </body>
 </html>

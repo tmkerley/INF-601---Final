@@ -3,7 +3,7 @@ from django.utils import timezone
 from .models import Workout_actual, Exercise
 
 class IndexView(generic.ListView):
-    template_name = 'workouts/index.html'
+    template_name = 'index'
     site_title = "User Home Page"
 
     def get_queryset(self):
@@ -16,7 +16,6 @@ class IndexView(generic.ListView):
 class ExerciseView(generic.ListView):
     template_name = "workouts/exercises.html"
     site_title = "Exercises"
-    pass
 
 class Workout_PlanView(generic.ListView):
     template_name = "workouts/workout_plan"

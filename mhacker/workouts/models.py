@@ -34,7 +34,7 @@ class Exercise(models.Model):
 
     class Meta:
         ordering = ["-name"]
-        
+
     def __str__(self):
         return self.name
 
@@ -49,6 +49,7 @@ class Workout_goal(models.Model):
     average_speed_mph = models.FloatField(default=7.2)
     # distance is record in miles
     miles_traveled = models.FloatField(default=1.5)
+    # user_ID = models.ForeignKey(User.pk, on_delete=models.CASCADE)
 
 
 class Workout_actual(models.Model):

@@ -1,0 +1,9 @@
+{% extends 'workouts/base/base_site.html' %}
+
+{% block main %}
+    {% if exercises %}
+        {% include "workouts/exercise_list.html" %}
+    {% else %}
+        <p>No exercises are available.</p>
+    {% endif %}
+{% endblock %}

@@ -1,13 +1,9 @@
-{% extends 'workouts/base/base_site.html' %}
-
-    
-    <!-- MAIN SECTION -->
-    {% block main %}
-        <div="container">
-            {% for i in Exercise %}
-                <div>
-                    {{ i.name }}
-                </div>
-            {% endfor %}
+<div="container">
+    <h3>Some of our Exercises include:</h3>
+    {% for exercise in exercises %}
+        <div class="container">
+            {{ exercise.name }}
         </div>
-    {% endblock %}
+    {% endfor %}
+    
+</div>

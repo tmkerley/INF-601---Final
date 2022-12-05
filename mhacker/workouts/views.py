@@ -8,24 +8,22 @@ from .models import Workout_actual, Exercise, User
 class HomeView(generic.ListView):
     template_name = 'workouts/home.html'
     site_title = "Home Page"
-    exercises = Exercise.objects.all()
+    context_object_name = 'exercises'
 
     def get_queryset(self):
         
         # Return the exercise objects
-        return Exercise.objects.all()
-        """ return Workout_actual.objects.filter(
-            date_lifted__lte=timezone.now()).order_by('date_lifted')[:10] """
+        return Exercise.objects.all()[:5]
 
 class ExercisesView(generic.ListView):
     template_name = "workouts/exercises.html"
     site_title = "Exercises"
-    exercises = Exercise.objects
+    context_object_name = 'exercises'
 
     def get_queryset(self):
         
         # Return the exercise objects
-        return Exercise.objects
+        return Exercise.objects.all()[:5]
 
 @login_required
 class Workout_PlanView(generic.ListView):

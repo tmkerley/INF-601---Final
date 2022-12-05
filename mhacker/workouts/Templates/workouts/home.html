@@ -6,12 +6,10 @@
     </div>
     <hr>
     <div="container">
-        
-        {% for exercise in exercises %}
-            <div class="container">
-                {{ exercise.name }}
-            </div>
-        {% endfor %}
-        
+        {% if exercises %}
+            {% include "workouts/exercise_list.html" %}
+        {% else %}
+            <p>No exercises are available.</p>
+        {% endif %}
     </div>
 {% endblock %}

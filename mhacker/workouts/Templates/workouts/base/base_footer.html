@@ -1,6 +1,8 @@
 {% load i18n %}
-<footer class="{% block footer_class %}footer mt-auto py-3 text-center bg-secondary{% endblock %}">
+<footer class="{% block footer_class %}footer mt-auto py-3 text-center{% endblock %}">
     <a href = "mailto:tmkerley@fhsu.edu?subject = Feedback&body = Message">
-        Send Feedback
+        <button type="button" class="btn btn-success">
+            Send Feedback
+        </button>
     </a>
 </footer>

@@ -1,0 +1,17 @@
+{% extends 'workouts/base/base_site.html' %}
+
+{% block main %}
+    <div>
+        Welcome!! Please Login 
+    </div>
+    <hr>
+    <div="container">
+        
+        {% for exercise in exercises %}
+            <div class="container">
+                {{ exercise.name }}
+            </div>
+        {% endfor %}
+        
+    </div>
+{% endblock %}

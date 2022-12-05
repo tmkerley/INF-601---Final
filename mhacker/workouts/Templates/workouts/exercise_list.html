@@ -1,8 +1,13 @@
 {% extends 'workouts/base/base_site.html' %}
 
+    
     <!-- MAIN SECTION -->
     {% block main %}
         <div="container">
             {% for i in Exercise %}
+                <div>
+                    {{ i.name }}
+                </div>
+            {% endfor %}
         </div>
     {% endblock %}

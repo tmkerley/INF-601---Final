@@ -1,7 +1,8 @@
 import datetime
 from django.db import models
 from django.utils import timezone
-from django.contrib import admin
+from django.contrib.auth.models import User
+
 
 def goalCompletion(actual,goal):
     goalSum = 0
@@ -31,6 +32,9 @@ class Exercise(models.Model):
     # anerobic vs aerobic types
     aType = models.CharField(max_length=16, choices=EXERCISE_TYPES)
 
+    class Meta:
+        ordering = ["-name"]
+        
     def __str__(self):
         return self.name
 

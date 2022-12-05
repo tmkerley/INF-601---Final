@@ -1,0 +1,17 @@
+{% extends 'workouts/base/base_site.html' %}
+
+{% block main %}
+<div class="container">
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <label>Username: </label>
+        <input type="text" name="username" placeholder="Enter username" />
+        
+        <label>Password: </label>
+        <input type="password" name="password" placeholder="Enter Password" />
+
+        <input type="submit" value="Login" />
+    </form>
+</div>
+{% endblock %}

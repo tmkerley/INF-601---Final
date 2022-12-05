@@ -11,7 +11,7 @@
         <title>{% block title %} MHacker - {{ site_title }} {% endblock %}</title>
 
         <!-- STYLE BLOCK SECTION -->
-        <link rel="stylesheet" href="{% block stylesheet %}{% static 'site/css/bootstrap.css' %}{% endblock %}">
+        <link rel="stylesheet" href="{% block stylesheet %}{% static 'workouts/css/bootstrap.css' %}{% endblock %}">
         {% block extrastyle %}{% endblock %}
         {% block responsive %}
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -27,6 +27,13 @@
             {% include "workouts\base\base_nav_top.html" %}
         {% endblock %}
 
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <!-- MAIN SECTION -->
         {% block main %}
             

@@ -2,11 +2,15 @@
 
 {% block main %}
     <div>
-        Welcome!! Please Login 
+        <h3>Welcome!! Please Login </h3>
+        <p>
+            We can help you track and improve your weighlifting activities.
+        </p>
     </div>
     <hr>
     <div="container">
         {% if exercises %}
+            <h5>Some of our Exercises include:</h5>
             {% include "workouts/exercise_list.html" %}
         {% else %}
             <p>No exercises are available.</p>

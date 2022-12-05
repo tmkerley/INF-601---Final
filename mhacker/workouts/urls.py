@@ -19,6 +19,11 @@ from . import views
 # app_name = 'workouts'
 urlpatterns = [
     path('', views.HomeView.as_view(), name="home"),
-    path('exercises/', views.ExercisesView.as_view(), name="exercises"),
+    
     path('login/', views.loginPage, name="login"),
+
+    path('exercises/', views.ExercisesView.as_view(), name="exercises"),
+    path('exercises/<int:pk>/', views.SingleExerciseView.as_view(), name="singleExercise"),
+
+    
 ]

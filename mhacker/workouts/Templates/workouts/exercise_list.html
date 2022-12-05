@@ -1,8 +1,9 @@
 <div="container">
-    <h3>Some of our Exercises include:</h3>
     {% for exercise in exercises %}
         <div class="container">
-            {{ exercise.name }}
+            <a href="{% url 'singleExercise' exercise.id %}">
+                {{ exercise.name }}
+            </a>
         </div>
     {% endfor %}
     

@@ -1,0 +1,23 @@
+{% extends 'workouts/base/base_site.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-3">
+            <h5>
+                Sort by:
+            </h5>
+            <h5>
+                Filter by:
+            </h5>
+        </div>
+        <div class="col-9">
+            <h4>
+                Workouts Performed
+            </h4>
+            {% for workout in user_workouts%}
+            <div class="container">
+                {{ workout.exercise.name}} {{ workout.number_of_sets}} {{ workout.reps_per_set}} {{ workout.weight_lifted}} {{ workout.goal_met}}
+            </div>
+            {% endfor %}
+        </div>
+    </div>

@@ -36,17 +36,22 @@ def SingleExerciseView(request, exercise_id):
     except Exercise.DoesNotExist:
         raise Http404("Exercise does not exist.")
 
+    site_title = singleExercise.name
+
     return render(
         request, 
         'workouts/exercises.html',
-        {'exercise':singleExercise, 'exercises':exercises})
+        {'exercise':singleExercise, 'exercises':exercises, 'site-title':site_title})
 
 
 @login_required
-class Workout_PlanView(generic.ListView):
-    template_name = "workouts/workout_plan"
-    site_title = "Workout Plan"
-    pass
+def Workout_View(request):
+    template_name = "workouts/workouts.html"
+    site_title = "Workouts"
+    user_workouts = Workout_actual.objects.filter(User.id)
+    return render(request, template_name,
+        {'user_workouts':user_workouts})
+    
 
 def loginPage(request):
     page = 'login'

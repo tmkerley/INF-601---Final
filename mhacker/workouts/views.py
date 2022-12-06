@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views import generic
 from .models import Workout_actual, Exercise, User
@@ -25,14 +26,20 @@ class ExercisesView(generic.ListView):
         # Return the exercise objects
         return Exercise.objects.all()[:5]
 
-class SingleExerciseView(generic.DetailView):
-    model = Exercise
+def SingleExerciseView(request, exercise_id):
+    exercises = Exercise.objects.all()
     template_name = 'workouts/exercise.html'
     site_title = "Exercise Details"
-    
 
-    def get_queryset(self):
-        return Exercise
+    try:
+        singleExercise = Exercise.objects.get(id=exercise_id)
+    except Exercise.DoesNotExist:
+        raise Http404("Exercise does not exist.")
+
+    return render(
+        request, 
+        'workouts/exercises.html',
+        {'exercise':singleExercise, 'exercises':exercises})
 
 
 @login_required

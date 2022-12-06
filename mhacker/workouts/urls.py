@@ -23,7 +23,7 @@ urlpatterns = [
     path('login/', views.loginPage, name="login"),
 
     path('exercises/', views.ExercisesView.as_view(), name="exercises"),
-    path('exercises/<int:pk>/', views.SingleExerciseView.as_view(), name="singleExercise"),
+    path('exercises/<int:exercise_id>/', views.SingleExerciseView, name="singleExercise"),
 
     
 ]

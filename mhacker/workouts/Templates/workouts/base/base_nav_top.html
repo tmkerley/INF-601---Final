@@ -24,9 +24,14 @@
             </ul>
         </div>
         <div class="login">
-            <a href="{% url 'login' %}">
+            <a class="nav-link" href="{% url 'loginPage' %}">
                 <button type="button" class="btn btn-success">
                     Login
+                </button>
+            </a>
+            <a class="nav-link" href="{% url 'registerPage' %}">
+                <button type="button" class="btn btn-success">
+                    Register
                 </button>
             </a>
         </div>

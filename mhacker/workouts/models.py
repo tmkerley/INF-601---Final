@@ -39,6 +39,7 @@ class Exercise(models.Model):
         return self.name
 
 class Workout_goal(models.Model):
+    user_id = models.ForeignKey(User.id, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     number_of_sets = models.IntegerField(default=3)
     reps_per_set = models.IntegerField(default=6)
@@ -49,10 +50,10 @@ class Workout_goal(models.Model):
     average_speed_mph = models.FloatField(default=7.2)
     # distance is record in miles
     miles_traveled = models.FloatField(default=1.5)
-    # user_ID = models.ForeignKey(User.pk, on_delete=models.CASCADE)
 
 
 class Workout_actual(models.Model):
+    user_id = models.ForeignKey(User.id)
     goal_workout_id = models.ForeignKey(
         Workout_goal, on_delete=models.CASCADE)
     time_of_workout = models.DateField('time of workout')

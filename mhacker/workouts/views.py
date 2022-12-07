@@ -62,7 +62,7 @@ def loginPage(request):
         return redirect('home')
 
     if request.method == 'POST':
-        username = request.POST.get('username').lower()
+        username = request.POST.get('username')
         password = request.POST.get('password')
 
         try:
@@ -86,6 +86,7 @@ def registerPage(request):
 
     if request.method == 'POST':
         form = MyUserCreationForm(request.POST)
+    
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -93,7 +94,7 @@ def registerPage(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'An error occurred during registration')
+            messages.error(request, 'An error occurred during registration.')
 
     return render(request, 'workouts/login_register.html', {'form': form})
 

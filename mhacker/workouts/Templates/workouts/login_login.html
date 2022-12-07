@@ -9,19 +9,13 @@
             <h1 class="h3 mb-3 fw-normal">
                 Please sign in
             </h1>
-            <div class="form-floating">
-                <input name="username" type="username" class="form-control" id="id_username" placeholder="name@example.com">
-                <label for="floatingInput">
-                    Username
-                </label>
+            <div class="form-floating-dark">
+                <input name="username" type="username" class="form-control-dark" id="id_username" placeholder="Username">
             </div>
-            <div class="form-floating">
-                <input name="password1" type="password" class="form-control" id="id_password1" placeholder="Password"><input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="password1">
-                    Password
-                </label>
+            <div class="form-floating-dark">
+                <input name="password1" type="password" class="form-control-dark" id="id_password1" placeholder="Password">
             </div>
-            <div class="checkbox mb-3">
+            <div class="checkbox-dark mb-3">
                 <label>
                     <input type="checkbox" value="remember-me"> Remember me
                 </label>
@@ -29,9 +23,11 @@
             <button class="btn btn-lg btn-success" type="submit">
                     Sign in
             </button>
+            <hr>
+            New user???
             <a class="nav-link" href="{% url 'registerPage' %}">
-                <button type="sumbit" class="btn btn-lg btn-success">
-                    Register
+                <button type="sumbit" class="btn btn-sm btn-success">
+                    Register Now!!
                 </button>
             </a>
         </form>

@@ -14,10 +14,14 @@
             <h4>
                 Workouts Performed
             </h4>
-            {% for workout in user_workouts%}
-            <div class="container">
-                {{ workout.exercise.name}} {{ workout.number_of_sets}} {{ workout.reps_per_set}} {{ workout.weight_lifted}} {{ workout.goal_met}}
-            </div>
-            {% endfor %}
+            {% if user_workouts %}
+                {% for workout in user_workouts%}
+                <div class="container">
+                    {{ workout.exercise.name}} {{ workout.number_of_sets}} {{ workout.reps_per_set}} {{ workout.weight_lifted}} {{ workout.goal_met}}
+                </div>
+                {% endfor %}
+            {% else %}
+                You haven't submitted any exercises yet.
+            {% endif %}
         </div>
     </div>

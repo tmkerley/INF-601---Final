@@ -3,37 +3,66 @@
     <nav class="container-fluid bd-gutter">
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                {% block nav_home_link %}
                 <li class="nav-item">
-                    {% block nav_home_link %}
                     <a class="nav-link" href="{% url 'home' %}">
                         <button type="button" class="btn btn-success">
                             Home
                         </button>
                     </a>
-                    {% endblock %}
                 </li>
+                {% endblock %}
+                {% block nav_Exercises_link %}
                 <li class="nav-item">
-                    {% block nav_Exercises_link %}
                     <a class="nav-link" aria-current="page" href="{% url 'exercises' %}">
                         <button type="button" class="btn btn-success">
                             Exercises
                         </button>
                     </a>
-                    {% endblock %}
                 </li>
+                {% endblock %}
+                {% if user.is_authenticated %}
+                    {% block nav_Workout_link %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'workoutPage' %}">
+                            <button type="button" class="btn btn-success">
+                                Workouts
+                            </button>
+                        </a>
+                    </li>
+                    {% endblock %}
+                {% endif %}
             </ul>
-        </div>
-        <div class="login">
-            <a class="nav-link" href="{% url 'loginPage' %}">
-                <button type="button" class="btn btn-success">
-                    Login
-                </button>
-            </a>
-            <a class="nav-link" href="{% url 'registerPage' %}">
-                <button type="button" class="btn btn-success">
-                    Register
-                </button>
-            </a>
+            {% if user.is_authenticated %}
+            <div class="logout">
+                <a class="nav-link" href="{% url 'home' %}">
+                    <button type="button" class="btn btn-success">
+                        Logout
+                    </button>
+                </a>
+            </div>
+            {% else %}
+                <div class="row">
+                    <div class="col">
+                        <div class="login">
+                            <a class="nav-link" href="{% url 'loginPage' %}">
+                                <button type="button" class="btn btn-success">
+                                    Login
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="register">
+                            <a class="nav-link" href="{% url 'registerPage' %}">
+                                <button type="button" class="btn btn-success">
+                                    Register
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </nav>
 </header>

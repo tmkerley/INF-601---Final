@@ -39,7 +39,7 @@ class Exercise(models.Model):
         return self.name
 
 class Workout_goal(models.Model):
-    user_id = models.ForeignKey(User.id, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     number_of_sets = models.IntegerField(default=3)
     reps_per_set = models.IntegerField(default=6)
@@ -53,7 +53,7 @@ class Workout_goal(models.Model):
 
 
 class Workout_actual(models.Model):
-    user_id = models.ForeignKey(User.id)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     goal_workout_id = models.ForeignKey(
         Workout_goal, on_delete=models.CASCADE)
     time_of_workout = models.DateField('time of workout')

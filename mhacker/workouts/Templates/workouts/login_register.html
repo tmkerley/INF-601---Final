@@ -5,29 +5,22 @@
         <form method="POST" action="">
             {% csrf_token %}
             {% load static %}
-            <img class="mb-8" src="{% static 'workouts/images/mh_sq_noborder.svg' %}" alt="Mhacker logo" width="150" height="125">
+            <a class="nav-link" href="{% url 'home' %}">
+                <img class="mb-8" src="{% static 'workouts/images/mh_sq_noborder.svg' %}" alt="Mhacker logo" width="150" height="125">
+            </a>
             <h1 class="h4 mb-3 fw-normal">
                 Register your login information
             </h1>
-            <div class="form-floating">
-                <input name="username" type="username" class="form-control" id="id_username" placeholder="name@example.com">
-                <label for="username">
-                    Username
-                </label>
+            <div class="form-floating-dark">
+                <input name="username" type="username" class="form-control-dark" id="id_username" placeholder="Username">
             </div>
-            <div class="form-floating">
-                <input name="password1" type="password" class="form-control" id="id_password1" placeholder="Password">
-                <label for="password1">
-                    Password
-                </label>
+            <div class="form-floating-dark">
+                <input name="password1" type="password" class="form-control-dark" id="id_password1" placeholder="Password">
             </div>
-            <div class="form-floating">
-                <input name="password2" type="password" class="form-control" id="id_password2" placeholder="Retype_Password">
-                <label for="password2">
-                    Re-type Password
-                </label>
+            <div class="form-floating-dark">
+                <input name="password2" type="password" class="form-control-dark" id="id_password2" placeholder="Retype Password">
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">
+            <button class="btn btn-lg btn-primary" type="submit">
                     Register
             </button>
         </form>

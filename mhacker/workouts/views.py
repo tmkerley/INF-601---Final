@@ -39,20 +39,24 @@ def SingleExerciseView(request, exercise_id):
         raise Http404("Exercise does not exist.")
 
     site_title = singleExercise.name
-
-    return render(
-        request, 
-        'workouts/exercises.html',
-        {'exercise':singleExercise, 'exercises':exercises, 'site-title':site_title})
+    context = {'exercise':singleExercise, 'exercises':exercises, 'site-title':site_title}
+    
+    return render(request, template_name, context)
 
 
-@login_required(redirect_field_name='loginPage')
-def Workout_View(request):
+@login_required(login_url='loginPage')
+def workoutPage(request):
     template_name = "workouts/workouts.html"
+    page = "workoutPage"
     site_title = "Workouts"
-    user_workouts = Workout_actual.objects.filter(User.id)
-    return render(request, template_name,
-        {'user_workouts':user_workouts})
+    user_id = request.user.id
+    user_workouts = Workout_actual.objects.get()
+
+    context = {'site_title':site_title,
+        'page':page,
+        'user_workouts':user_workouts,
+        }
+    return render(request, template_name, context)
     
 
 def loginPage(request):
@@ -101,21 +105,3 @@ def registerPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('home')
-
-""" 
-TODO Modify this to match mine. Add template and form function
-def registerPage(request):
-    form = MyUserCreationForm()
-
-    if request.method == 'POST':
-        form = MyUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, 'An error occurred during registration')
-
-    return render(request, 'base/login_register.html', {'form': form}) """

@@ -49,8 +49,18 @@ def workoutPage(request):
     template_name = "workouts/workouts.html"
     page = "workoutPage"
     site_title = "Workouts"
-    user_id = request.user.id
-    user_workouts = Workout_actual.objects.get()
+    
+    # If there is a logged in user, pull user info
+    # else, redirect home.
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        return redirect('home')
+    
+    try:
+        user_workouts = Workout_actual.objects.get(id=user.id)
+    except Workout_actual.DoesNotExist:
+        raise Http404("No workouts available")
 
     context = {'site_title':site_title,
         'page':page,
@@ -61,6 +71,7 @@ def workoutPage(request):
 
 def loginPage(request):
     page = 'login'
+    template_name = 'workouts/login_login.html'
 
     if request.user.is_authenticated:
         return redirect('home')
@@ -81,9 +92,10 @@ def loginPage(request):
             return redirect('home')
         else:
             messages.error(request, 'Username OR password is incorrect')
+            
 
     context = {'page':page}
-    return render(request, 'workouts/login_login.html', context)
+    return render(request, template_name, context)
 
 def registerPage(request):
     form = MyUserCreationForm()
@@ -99,6 +111,10 @@ def registerPage(request):
             return redirect('home')
         else:
             messages.error(request, 'An error occurred during registration.')
+            if form.data is None:
+                messages.error(request, 'Form has no data')
+            if form.errors is not None:
+                messages.error(request, form.errors)
 
     return render(request, 'workouts/login_register.html', {'form': form})
 

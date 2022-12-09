@@ -21,9 +21,8 @@
                     </a>
                 </li>
                 {% endblock %}
-                {% if user.is_authenticated %}
+                {% if request.user.is_authenticated %}
                     {% block nav_Workout_link %}
-                    <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{% url 'workoutPage' %}">
                             <button type="button" class="btn btn-success">
                                 Workouts
@@ -35,11 +34,18 @@
             </ul>
             {% if user.is_authenticated %}
             <div class="logout">
-                <a class="nav-link" href="{% url 'home' %}">
-                    <button type="button" class="btn btn-success">
-                        Logout
-                    </button>
-                </a>
+                <div class="row">
+                    <div class='col'>
+                        You are signed in as: {{ request.user.username }}.
+                    </div>
+                    <div class='col'>
+                        <a class="nav-link" href="{% url 'home' %}">
+                            <button type="button" class="btn btn-success">
+                                Logout
+                            </button>
+                        </a>
+                    </div>
+                </div>
             </div>
             {% else %}
                 <div class="row">

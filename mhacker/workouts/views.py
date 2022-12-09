@@ -39,16 +39,20 @@ def SingleExerciseView(request, exercise_id):
         raise Http404("Exercise does not exist.")
 
     site_title = singleExercise.name
-    context = {'exercise':singleExercise, 'exercises':exercises, 'site-title':site_title}
+    context = {'exercise':singleExercise, 
+               'exercises':exercises, 
+               'site-title':site_title,
+               'user':request.user}
     
     return render(request, template_name, context)
 
 
 @login_required(login_url='loginPage')
 def workoutPage(request):
-    template_name = "workouts/workouts.html"
+    template_name = 'workouts/workout_page.html'
     page = "workoutPage"
     site_title = "Workouts"
+    # user = User.get_username(request.user)
     
     # If there is a logged in user, pull user info
     # else, redirect home.
@@ -60,11 +64,12 @@ def workoutPage(request):
     try:
         user_workouts = Workout_actual.objects.get(id=user.id)
     except Workout_actual.DoesNotExist:
-        raise Http404("No workouts available")
+        raise messages.error(request, "No workouts available")
 
     context = {'site_title':site_title,
         'page':page,
         'user_workouts':user_workouts,
+        'username':User.get_username(request.user),
         }
     return render(request, template_name, context)
     
@@ -112,7 +117,7 @@ def registerPage(request):
         else:
             messages.error(request, 'An error occurred during registration.')
             if form.data is None:
-                messages.error(request, 'Form has no data')
+                messages.error(request, 'Form has no data.')
             if form.errors is not None:
                 messages.error(request, form.errors)
 

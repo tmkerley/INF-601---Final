@@ -30,7 +30,7 @@ class ExercisesView(generic.ListView):
 
 def SingleExerciseView(request, exercise_id):
     exercises = Exercise.objects.all()
-    template_name = 'workouts/exercise.html'
+    template_name = 'workouts/exercises.html'
     site_title = "Exercise Details"
 
     try:

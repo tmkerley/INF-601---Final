@@ -20,6 +20,7 @@ from . import views
 urlpatterns = [
     path('', views.HomeView.as_view(), name="home"),
     path('login/', views.loginPage, name="loginPage"),
+    path('logout/', views.logoutUser, name="logout"),
     path('register/', views.registerPage, name="registerPage"),
     path('exercises/', views.ExercisesView.as_view(), name="exercises"),
     path('exercises/<int:exercise_id>/', views.SingleExerciseView, name="singleExercise"),

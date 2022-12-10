@@ -91,7 +91,7 @@ def loginPage(request):
             messages.error(request, 'User does not exist')
 
         user = authenticate(request, username=username, password=password)
-
+        
         if user is not None:
             login(request, user)
             return redirect('home')
@@ -107,19 +107,22 @@ def registerPage(request):
 
     if request.method == 'POST':
         form = MyUserCreationForm(request.POST)
-    
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('home')
+
+        if form.password1 is form.password2:
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.username = user.username.lower()
+                user.save()
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'An error occurred during registration.')
+                if form.data is None:
+                    messages.error(request, 'Form has no data.')
+                if form.errors is not None:
+                    messages.error(request, form.errors)
         else:
-            messages.error(request, 'An error occurred during registration.')
-            if form.data is None:
-                messages.error(request, 'Form has no data.')
-            if form.errors is not None:
-                messages.error(request, form.errors)
+            messages.error(request, "Passwords do not match.")
 
     return render(request, 'workouts/login_register.html', {'form': form})
 

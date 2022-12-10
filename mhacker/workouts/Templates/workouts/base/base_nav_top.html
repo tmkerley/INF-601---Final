@@ -36,10 +36,10 @@
             <div class="logout">
                 <div class="row">
                     <div class='col'>
-                        You are signed in as: {{ request.user.username }}.
+                        Welcome {{ request.user.username }}
                     </div>
                     <div class='col'>
-                        <a class="nav-link" href="{% url 'home' %}">
+                        <a class="nav-link" href="{% url 'logout' %}">
                             <button type="button" class="btn btn-success">
                                 Logout
                             </button>

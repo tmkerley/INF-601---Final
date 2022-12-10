@@ -62,7 +62,7 @@ def workoutPage(request):
         return redirect('home')
     
     try:
-        user_workouts = Workout_actual.objects.get(id=user.id)
+        user_workouts = Workout_actual.objects.filter(id=user.id)
     except Workout_actual.DoesNotExist:
         raise messages.error(request, "No workouts available")
 

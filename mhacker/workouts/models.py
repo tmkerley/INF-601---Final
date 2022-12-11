@@ -41,39 +41,39 @@ class Exercise(models.Model):
 class Workout_goal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=-1)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-    number_of_sets = models.IntegerField(default=3)
-    reps_per_set = models.IntegerField(default=6)
-    weight_lifted = models.IntegerField(default=10)
-    # time should be hh:mm:ss
-    duration_seconds = models.TimeField(default='00:12:30')
+    number_of_sets = models.IntegerField(null=True, blank=True)
+    reps_per_set = models.IntegerField(null=True, blank=True)
+    weight_lifted_lbs = models.IntegerField(null=True, blank=True)
+    # duration stored in seconds
+    duration_seconds = models.TimeField(null=True, blank=True)
     # speed is recorded in mph
-    average_speed_mph = models.FloatField(default=7.2)
+    average_speed_mph = models.FloatField(null=True, blank=True)
     # distance is record in miles
-    miles_traveled = models.FloatField(default=1.5)
+    miles_traveled = models.FloatField(null=True, blank=True)
 
 class Workout_actual(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=-1)
     goal_workout_id = models.ForeignKey(
         Workout_goal, on_delete=models.CASCADE)
-    time_of_workout = models.DateField('time of workout')
+    time_of_workout = models.DateTimeField(auto_now_add=True)
 
     goal_met = models.BooleanField(default=False)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-    number_of_sets = models.IntegerField(default=1)
-    reps_per_set = models.IntegerField(default=1)
-    weight_lifted_lbs = models.IntegerField(default=5)
+    number_of_sets = models.IntegerField(null=True, blank=True)
+    reps_per_set = models.IntegerField(null=True, blank=True)
+    weight_lifted_lbs = models.IntegerField(null=True, blank=True)
     # duration stored in seconds
-    duration_seconds = models.TimeField(default='00:12:30')
+    duration_seconds = models.TimeField(null=True, blank=True)
     # speed is recorded in mph
-    average_speed_mph = models.FloatField(default=7.2)
+    average_speed_mph = models.FloatField(null=True, blank=True)
     # distance is record in miles
-    miles_traveled = models.FloatField(default=1.5)
+    miles_traveled = models.FloatField(null=True, blank=True)
 
     class Meta:
         ordering = ["-time_of_workout"]
 
     def __str__(self):
-            return self.name
+            return self.exercise
 
 
     # counts how many goals were completed.

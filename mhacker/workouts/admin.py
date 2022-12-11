@@ -33,7 +33,7 @@ class WorkoutGoalListAdmin(admin.TabularInline):
     exercise = Workout_goal.exercise
     number_of_sets = Workout_goal.number_of_sets
     reps_per_set = Workout_goal.reps_per_set
-    weight_lifted = Workout_goal.weight_lifted
+    weight_lifted_lbs = Workout_goal.weight_lifted_lbs
     # time should be hh:mm:ss
     duration_seconds = Workout_goal.duration_seconds
     # speed is recorded in mph

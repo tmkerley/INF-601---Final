@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views import generic
+from django.utils import timezone
 from .models import Workout_actual, Exercise, User
 from .forms import MyUserCreationForm
 
@@ -77,14 +78,26 @@ def workoutAdd(request):
     site_title = "Add Workout"
 
     if request.method == 'POST':
-        workoutDictionary = {
-
+        workoutInfo = {
+            'exercise':request.POST.get('exercise'),
+            'number_of_sets':request.POST.get('number_of_sets'),
+            'reps_per_set':request.POST.get('reps_per_set'),
+            'weight_lifted_lbs':request.POST.get('weight_lifted_lbs'),
         }
+        w = Workout_actual(
+            exercise=workoutInfo.get('exercise'),
+            number_of_sets=workoutInfo.get('number_of_sets'),
+            reps_per_set=workoutInfo.get('reps_per_set'),
+            weight_lifted_lbs=workoutInfo.get('weight_lifted_lbs'),
+            time_of_workout=timezone.now()
+            )
+        w.save()
+        return redirect('workoutPage')
+
     context = {
         'page':page, 
         'site_title':site_title,
     }
-    
     return render(request, template_name, context)
 
 

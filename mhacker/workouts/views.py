@@ -39,10 +39,12 @@ def SingleExerciseView(request, exercise_id):
         raise Http404("Exercise does not exist.")
 
     site_title = singleExercise.name
-    context = {'exercise':singleExercise, 
-               'exercises':exercises, 
-               'site-title':site_title,
-               'user':request.user}
+    context = {
+        'exercise':singleExercise, 
+        'exercises':exercises, 
+        'site-title':site_title,
+        'user':request.user,
+    }
     
     return render(request, template_name, context)
 
@@ -52,27 +54,39 @@ def workoutPage(request):
     template_name = 'workouts/workout_page.html'
     page = "workoutPage"
     site_title = "Workouts"
-    # user = User.get_username(request.user)
+    user = request.user
     
-    # If there is a logged in user, pull user info
-    # else, redirect home.
-    if request.user.is_authenticated:
-        user = request.user
-    else:
-        return redirect('home')
-    
+    # pulls workouts for the logged in user
     try:
         user_workouts = Workout_actual.objects.filter(id=user.id)
     except Workout_actual.DoesNotExist:
         raise messages.error(request, "No workouts available")
 
-    context = {'site_title':site_title,
+    context = {
+        'site_title':site_title,
         'page':page,
         'user_workouts':user_workouts,
         'username':User.get_username(request.user),
-        }
+    }
     return render(request, template_name, context)
     
+@login_required(login_url='loginPage')
+def workoutAdd(request):
+    template_name = 'workouts/addWorkout.html'
+    page = "addWorkout"
+    site_title = "Add Workout"
+
+    if request.method == 'POST':
+        workoutDictionary = {
+
+        }
+    context = {
+        'page':page, 
+        'site_title':site_title,
+    }
+    
+    return render(request, template_name, context)
+
 
 def loginPage(request):
     page = 'login'
@@ -99,7 +113,9 @@ def loginPage(request):
             messages.error(request, 'Username OR password is incorrect')
             
 
-    context = {'page':page}
+    context = {
+        'page':page,
+    }
     return render(request, template_name, context)
 
 def registerPage(request):

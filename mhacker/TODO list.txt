@@ -1,13 +1,20 @@
+12.11.22
+Exercise should be a drop down
+
 12.10.22
 FIXED - fix login error (html was referencing the wrong name="")
 FIXED - fix logout functionality (needed logoutUser function call)
 FIXED - Change format of current user (Removed phrase to be "Welcome, User)
+
 display workouts table of a user
 change message pop up to be a modal
-
 add sort/filter features to workouts
 add create workout plan page.
 add exercise search feature to expand. 
 add muslce model
 layout of homepage, not proportioned and remove border of sidebar
 fix small screen Navbar
+there appears to be a side bar on workouts page
+Add master goals functionality met to workout page
+Add socials svgs to footer
+Add carido based workout Add

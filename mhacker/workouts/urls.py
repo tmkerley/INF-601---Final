@@ -24,5 +24,7 @@ urlpatterns = [
     path('register/', views.registerPage, name="registerPage"),
     path('exercises/', views.ExercisesView.as_view(), name="exercises"),
     path('exercises/<int:exercise_id>/', views.SingleExerciseView, name="singleExercise"),
+    
     path('workoutpage/', views.workoutPage, name="workoutPage"),
+    path('workout/AddWorkout/', views.workoutAdd, name="workoutAdd"),
 ]

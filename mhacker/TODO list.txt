@@ -2,16 +2,21 @@
 FIXED - Exercise should be a drop down (used a form class)
 FIXED - look into turning workoutadd into a custom form creation class like 
     user login
-display workouts table of a user
+FIXED - display workouts table of a user (was incorrectly using the id of the 
+    user to find the id of an workout, instead of finding the workouts with a 
+    user field equal to the user id)
+FIXED - Add socials svgs to footer (Generic svgs from https://icons8.com/ )
+FIXED - layout of homepage, not proportioned and remove border of sidebar 
+    (border removed, but layout is eh)
+
+make the date displayed to be local timezone to the user
 change message pop up to be a modal
 add sort/filter features to workouts
 add create workout plan page.
 add exercise search feature to expand. 
-add muslce model
-layout of homepage, not proportioned and remove border of sidebar
+add muscle model
 fix small screen Navbar
 Add master goals met functionality to workout page
-Add socials svgs to footer
 Add carido vs weights based workout intelligence
 
 12.10.22

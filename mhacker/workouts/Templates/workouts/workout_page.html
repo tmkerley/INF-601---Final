@@ -24,9 +24,7 @@
                     Workouts Performed
                 </h4>
             </div>
-
             {% comment %} Add, remove, percent goals section {% endcomment %}
-
             <div class="row">
                 <div class ="col-1">
                     <a class="nav-link" href="{% url 'addWorkout' %}">
@@ -56,9 +54,7 @@
                     % of goals met
                 </div>
             </div>
-
             {% comment %} table section {% endcomment %}
-
             <div class="row">
                 {% if user_workouts %}
                     <table class="table table-striped table-dark table-sm table-hover">
@@ -85,7 +81,6 @@
                             {% endfor %}
                         </tbody>
                     </table>
-
                 {% else %}
                     <h5>
                         You haven't submitted any exercises yet.

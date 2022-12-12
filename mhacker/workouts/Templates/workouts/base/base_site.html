@@ -41,7 +41,8 @@
 
         <!-- SCRIPT SECTION -->
         {% block scripts %}
-        {% comment %} <script src="{% static 'base/js/bootstrap.bundle.min.js' %}"></script> {% endcomment %}
+        {% load static %}
+        <script src="{% static 'workouts/js/bootstrap.bundle.min.js' %}"></script>
         {% endblock %}
         {% block scripts_extra %}
         {% endblock %}

@@ -1,0 +1,25 @@
+{% load i18n %}
+<div class="dropdown">
+    <button class="btn btn-success dropdown-toggle" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
+        Exercises
+    </button>
+    <ul class="dropdown-menu">
+        {% if exercises %}
+            {% for exercise in exercises %}
+                <li>
+                    <a class="dropdown-item" href="{% url 'singleExercise' exercise.id %}">
+                        {{ exercise.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        {% endif %}
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+        <li>
+            <a class="dropdown-item" href="#">
+                FTR NEW Ex
+            </a>
+        </li>
+    </ul>
+</div>

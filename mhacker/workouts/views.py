@@ -48,11 +48,9 @@ def SingleExerciseView(request, exercise_id):
 
 @login_required(login_url='loginPage')
 def workoutPage(request):
-    user = request.user
-    
     # pulls workouts for the logged in user
     try:
-        user_workouts = Workout_actual.objects.filter(user=user)
+        user_workouts = Workout_actual.objects.filter(user=request.user)
     except Workout_actual.DoesNotExist:
         raise messages.error(request, "No workouts available")
 
@@ -114,18 +112,14 @@ def deleteWorkout(request, pk):
 
 @login_required
 def goalDisplay(request):
-
+    user_workouts = Workout_actual.objects.filter(user=request.user)
     context = {
-        'page':page, 
-        'site_title':site_title,
-        'form':form,
+        'page':"goals", 
+        'site_title':"goals",
     }
-    return render(request, template_name, context)
+    return render(request, 'workouts/goalsbase.html', context)
 
 def loginPage(request):
-    page = 'login'
-    template_name = 'workouts/login_login.html'
-
     if request.user.is_authenticated:
         return redirect('home')
 
@@ -148,9 +142,9 @@ def loginPage(request):
             
 
     context = {
-        'page':page,
+        'page':'login',
     }
-    return render(request, template_name, context)
+    return render(request, 'workouts/login_login.html', context)
 
 def registerPage(request):
     form = MyUserCreationForm()

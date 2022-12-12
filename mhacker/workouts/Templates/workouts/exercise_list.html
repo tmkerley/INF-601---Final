@@ -1,10 +1,11 @@
 <div class="container">
-    {% for exercise in exercises %}
-        <div class="container">
+    <ul class="list-group">
+        {% for exercise in exercises %}
+        <li class="list-group-item list-group-item-dark">
             <a href="{% url 'singleExercise' exercise.id %}">
                 {{ exercise.name }}
             </a>
-        </div>
-    {% endfor %}
-    
+        </li>
+        {% endfor %}
+    </ul>
 </div>

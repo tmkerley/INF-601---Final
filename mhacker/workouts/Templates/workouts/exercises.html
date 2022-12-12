@@ -3,17 +3,10 @@
 {% block main %}
     <div class="container text-center">
         <div class="row">
-            <div class="col-3 text-sm-start">
-                {% if exercises %}
-                    <h5>
-                        Exercise List
-                    </h5>
-                    {% include "workouts/exercise_list.html" %}
-                {% else %}
-                    <p>No exercises are available.</p>
-                {% endif %}
-            </div>
-            <div class="col-9">
+            {% block dropdown %}
+                {% include 'workouts/exercise_dropdown.html' %}
+            {% endblock %}
+            <div class="row justify-content-center">
                     {% if exercise %}
                         <h4> {{ exercise.name }} </h4>
                         <ul class="list-group">
@@ -31,7 +24,7 @@
                             </li>
                         </ul>
                     {% else %}
-                        <h4>Please select an exercise from the left.</h4>
+                        <p>No exercise selected</p>
                     {% endif %}
             </div>
         </div>

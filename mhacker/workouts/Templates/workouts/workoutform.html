@@ -1,0 +1,22 @@
+{% extends 'workouts/workout_page.html' %}
+
+{% block workoutTables %}
+<form method="POST" action="">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">
+        Add workout details
+    </h1>
+    {% if form.subject.errors %}
+        <ol>
+            {% for error in form.subjects.errors %}
+            <li><strong> {{ error|escape }}</strong></li>
+            {% endfor %}
+        </ol>
+    {% else %}
+    {{ form.as_p }}
+    <button class="btn btn-success" type="submit">
+            Submit
+    </button>
+    {% endif %}
+</form>
+{% endblock %}

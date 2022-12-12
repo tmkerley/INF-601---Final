@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.views import generic
 from django.utils import timezone
 from .models import Workout_actual, Exercise, User
-from .forms import MyUserCreationForm
+from .forms import MyUserCreationForm, workoutForm
 
 class HomeView(generic.ListView):
     template_name = 'workouts/home.html'
@@ -59,7 +59,7 @@ def workoutPage(request):
     
     # pulls workouts for the logged in user
     try:
-        user_workouts = Workout_actual.objects.filter(id=user.id)
+        user_workouts = Workout_actual.objects.filter(user=user)
     except Workout_actual.DoesNotExist:
         raise messages.error(request, "No workouts available")
 
@@ -67,39 +67,66 @@ def workoutPage(request):
         'site_title':site_title,
         'page':page,
         'user_workouts':user_workouts,
-        'username':User.get_username(request.user),
+        'username':request.user,
     }
     return render(request, template_name, context)
     
 @login_required(login_url='loginPage')
-def workoutAdd(request):
-    template_name = 'workouts/addWorkout.html'
+def addWorkout(request):
+    template_name = 'workouts/workoutform.html'
     page = "addWorkout"
     site_title = "Add Workout"
+    
+    form = workoutForm()
 
     if request.method == 'POST':
-        workoutInfo = {
-            'exercise':request.POST.get('exercise'),
-            'number_of_sets':request.POST.get('number_of_sets'),
-            'reps_per_set':request.POST.get('reps_per_set'),
-            'weight_lifted_lbs':request.POST.get('weight_lifted_lbs'),
-        }
-        w = Workout_actual(
-            exercise=workoutInfo.get('exercise'),
-            number_of_sets=workoutInfo.get('number_of_sets'),
-            reps_per_set=workoutInfo.get('reps_per_set'),
-            weight_lifted_lbs=workoutInfo.get('weight_lifted_lbs'),
-            time_of_workout=timezone.now()
-            )
-        w.save()
+        Workout_actual.objects.create(
+            user = request.user,
+            exercise = Exercise.objects.get(id=request.POST["exercise"]),
+            reps_per_set = request.POST["reps_per_set"],
+            weight_lifted_lbs = request.POST["weight_lifted_lbs"],
+            number_of_sets = request.POST["number_of_sets"],
+        )
         return redirect('workoutPage')
+    else:
+        messages.error(request, "Workout not added.")
 
     context = {
         'page':page, 
         'site_title':site_title,
+        'form':form,
     }
     return render(request, template_name, context)
 
+@login_required
+def updateWorkout(request, pk):
+    template_name = 'workouts/workoutform.html'
+    page = "UpdateWorkout"
+    site_title = "Update Workout"
+
+    workout = Workout_actual.objects.get(id=pk)
+    form = workoutForm()
+
+    context = {
+        'page':page, 
+        'site_title':site_title,
+        'form':form,
+    }
+    return render(request, template_name, context)
+
+@login_required
+def deleteWorkout(request, pk):
+    template_name = 'workouts/workoutform.html'
+    page = "UpdateWorkout"
+    site_title = "Update Workout"
+    form = workoutForm()
+
+    context = {
+        'page':page, 
+        'site_title':site_title,
+        'form':form,
+    }
+    return render(request, template_name, context)
 
 def loginPage(request):
     page = 'login'

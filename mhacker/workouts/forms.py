@@ -12,14 +12,10 @@ class workoutForm(ModelForm):
     class Meta:
         model = Workout_actual
         fields = [
+            'user',
             'exercise',
             'number_of_sets',
             'reps_per_set',
             'weight_lifted_lbs',
         ]
-
-    def clean_exercise(self):
-        exercise = self
-
-    def clean_weight(self):
-        weight = self
+        exclude = ["user"]

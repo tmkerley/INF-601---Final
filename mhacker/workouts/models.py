@@ -52,12 +52,12 @@ class Workout_goal(models.Model):
     miles_traveled = models.FloatField(null=True, blank=True)
 
 class Workout_actual(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=-1)
-    goal_workout_id = models.ForeignKey(
-        Workout_goal, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # goal_workout_id = models.ForeignKey(
+    #     Workout_goal, on_delete=models.CASCADE)
     time_of_workout = models.DateTimeField(auto_now_add=True)
 
-    goal_met = models.BooleanField(default=False)
+    goal_met = models.BooleanField(default=False, null=True)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     number_of_sets = models.IntegerField(null=True, blank=True)
     reps_per_set = models.IntegerField(null=True, blank=True)

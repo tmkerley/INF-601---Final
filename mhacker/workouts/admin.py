@@ -13,7 +13,7 @@ class ExerciseListAdmin(admin.TabularInline):
 
 class WorkoutActualListAdmin(admin.TabularInline):
     user = Workout_actual.user
-    goal_workout_id = Workout_actual.goal_workout_id
+    # goal_workout_id = Workout_actual.goal_workout_id
     time_of_workout = Workout_actual.time_of_workout
 
     goal_met = Workout_actual.goal_met

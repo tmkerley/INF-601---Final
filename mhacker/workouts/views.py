@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.utils import timezone
-from .models import Workout_actual, Exercise, User
+from .models import Workout_actual, Exercise, User, Days_plan
 from .forms import MyUserCreationForm, workoutForm
 
 class HomeView(generic.ListView):
@@ -111,8 +111,10 @@ def deleteWorkout(request, pk):
     return render(request, 'workouts/workoutform.html', context)
 
 @login_required
-def goalDisplay(request):
+def planDisplay(request):
     user_workouts = Workout_actual.objects.filter(user=request.user)
+
+    workout_of_the_day = Days_plan.getRecentPlan()
     context = {
         'page':"goals", 
         'site_title':"goals",

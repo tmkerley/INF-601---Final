@@ -1,4 +1,4 @@
-import datetime
+import datetime, random
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -88,36 +88,46 @@ class Workout_actual(models.Model):
         return goalCompletion(actual,goal) / len(goal)
 
     # 
-    def was_performed_recently(self):
+    def wasPerformedRecently(self):
         now = timezone.now()
         return now - datetime.timedelta(
-            days=14) <= self.time_of_workout <= now
+            days=2) <= self.time_of_workout <= now
+ 
 
-class Days_workout(models.Model):
-    actual_workout = models.ForeignKey(Workout_actual, on_delete=models.CASCADE)
-    goal_workout = models.ForeignKey(Workout_goal, on_delete=models.CASCADE)
-    date_of_workouts = datetime.date
-    met_day_goals = models.BooleanField(default=False)
-    met_day_goals_percent = models.IntegerField(default=0)
+class Days_plan(models.Model):
+    workouts = models.ForeignKey(Workout_actual, on_delete=models.CASCADE)
+    # goal_workout = models.ForeignKey(Workout_goal, on_delete=models.CASCADE)
+    # met_day_goals = models.BooleanField(default=False)
+    # met_day_goals_percent = models.IntegerField(default=0)
+    date_created = models.DateTimeField(auto_now_add=True)
 
-    # counts how many goals were completed.
-    def goalCompletion(actual,goal):
-        goalSum = 0
-        for i in actual.goal_met:
-            if i: 
-                goalSum += 1
-        return goalSum
+    class Meta:
+        ordering = ["-date_created"]
 
-    # calculates the percentage of goals completed.
-    def goalPercent(actual,goal):
-        return goalCompletion(actual,goal) / len(goal)
+    def __str__(self):
+            return self.date_created
 
-"""
-    met_day_goals_percent = goalCompletion(
-        actual_workout,goal_workout) / len(goal_workout)    
-    if met_day_goals_percent == 100:
-        met_day_goals = True 
-"""
+    def setNewPlan(self):
+        """
+        if a muscle has been worked out in the past 48 hours exclude it.
+        """
+        MUSCLE_GROUPS = (
+            ("Arms",)
+        )
+        recentWorkoutSet = Workout_actual.wasPerformedRecently()
+        if recentWorkoutSet is not None:
+            exercises = recentWorkoutSet.exercises_set.all()
+            invalidMuscles = exercises.muscles_set.all()
+        else:
+            case: random(1,4)
+
+        return Exercise.objects.exclude(muscles=invalidMuscles)[:6]
+
+    def getRecentPlan(self):
+        """
+        Pulls most recent plan and returns it
+        """
+        return self.object.all()[:1]
         
 
 

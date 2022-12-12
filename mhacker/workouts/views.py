@@ -30,10 +30,7 @@ class ExercisesView(generic.ListView):
         return Exercise.objects.all()[:5]
 
 def SingleExerciseView(request, exercise_id):
-    exercises = Exercise.objects.all()
-    template_name = 'workouts/exercises.html'
-    site_title = "Exercise Details"
-
+    # pulls a single exercise to show it's details and instruction
     try:
         singleExercise = Exercise.objects.get(id=exercise_id)
     except Exercise.DoesNotExist:
@@ -42,19 +39,15 @@ def SingleExerciseView(request, exercise_id):
     site_title = singleExercise.name
     context = {
         'exercise':singleExercise, 
-        'exercises':exercises, 
-        'site-title':site_title,
+        'exercises':Exercise.objects.all(), 
+        'site-title':"Exercise Details",
         'user':request.user,
     }
     
-    return render(request, template_name, context)
-
+    return render(request, 'workouts/exercises.html', context)
 
 @login_required(login_url='loginPage')
 def workoutPage(request):
-    template_name = 'workouts/workout_page.html'
-    page = "workoutPage"
-    site_title = "Workouts"
     user = request.user
     
     # pulls workouts for the logged in user
@@ -64,21 +57,19 @@ def workoutPage(request):
         raise messages.error(request, "No workouts available")
 
     context = {
-        'site_title':site_title,
-        'page':page,
+        'site_title':"Workouts",
+        'page':"workoutPage",
         'user_workouts':user_workouts,
         'username':request.user,
     }
-    return render(request, template_name, context)
+    return render(request, 'workouts/workout_page.html', context)
     
 @login_required(login_url='loginPage')
 def addWorkout(request):
-    template_name = 'workouts/workoutform.html'
-    page = "addWorkout"
-    site_title = "Add Workout"
-    
+    # shows the empty form
     form = workoutForm()
 
+    # if the submit hit, create new entry into database
     if request.method == 'POST':
         Workout_actual.objects.create(
             user = request.user,
@@ -92,34 +83,37 @@ def addWorkout(request):
         messages.error(request, "Workout not added.")
 
     context = {
-        'page':page, 
-        'site_title':site_title,
+        'page':"addWorkout", 
+        'site_title':"Add Workout",
         'form':form,
     }
-    return render(request, template_name, context)
+    return render(request, 'workouts/workoutform.html', context)
 
 @login_required
 def updateWorkout(request, pk):
-    template_name = 'workouts/workoutform.html'
-    page = "UpdateWorkout"
-    site_title = "Update Workout"
-
     workout = Workout_actual.objects.get(id=pk)
     form = workoutForm()
 
     context = {
-        'page':page, 
-        'site_title':site_title,
+        'page':"UpdateWorkout", 
+        'site_title':"Update Workout",
         'form':form,
     }
-    return render(request, template_name, context)
+    return render(request, 'workouts/workoutform.html', context)
 
 @login_required
 def deleteWorkout(request, pk):
-    template_name = 'workouts/workoutform.html'
-    page = "UpdateWorkout"
-    site_title = "Update Workout"
     form = workoutForm()
+
+    context = {
+        'page':"UpdateWorkout", 
+        'site_title':"Update Workout",
+        'form':form,
+    }
+    return render(request, 'workouts/workoutform.html', context)
+
+@login_required
+def goalDisplay(request):
 
     context = {
         'page':page, 

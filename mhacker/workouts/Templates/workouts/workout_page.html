@@ -17,8 +17,8 @@
             </div>
         </div>
         {% endblock %}
-        <div class="col-8">
         {% block workoutTables %}
+        <div class="col-8">
             <div class ="row">
                 <h4>
                     Workouts Performed
@@ -33,20 +33,13 @@
                         </button>
                     </a>
                 </div>
-                <div class ="col-1">
-                    <a class="nav-link" href="{% url 'updateWorkout' %}">
-                        <button type="button" class="btn btn-sm btn-success">
-                            Edit
-                        </button>
-                    </a>
-                </div>
-                <div class ="col-1">
+                {% comment %} <div class ="col-1">
                     <a class="nav-link" href="{% url 'deleteWorkout' %}">
                         <button type="button" class="btn btn-sm btn-success">
                             Delete
                         </button>
                     </a>
-                </div>
+                </div> {% endcomment %}
                 <div class ="col">
                 </div>
                 <div class ="col-2">
@@ -57,7 +50,7 @@
             {% comment %} table section {% endcomment %}
             <div class="row">
                 {% if user_workouts %}
-                    <table class="table table-striped table-dark table-sm table-hover">
+                    <table class="table table-striped table-dark table-sm table-hover table-responsive">
                         <thead class="thead">
                             <tr>
                                 <th scope="col">Date</th>
@@ -71,12 +64,16 @@
                         <tbody>
                             {% for workout in user_workouts%}
                             <tr>
-                                <th scope="row">{{ workout.time_of_workout }}</th>
-                                <td>{{ workout.exercise.name}}</td>
-                                <td>{{ workout.number_of_sets}}</td>
-                                <td>{{ workout.reps_per_set}}</td>
-                                <td>{{ workout.weight_lifted_lbs}}</td>
-                                <td>{{ workout.goal_met}}</td>
+                                    <th scope="row">
+                                        <a class="link-light" href="{% url 'updateWorkout' workout.id %}">
+                                            {{ workout.time_of_workout }}
+                                        </a>
+                                    </th>
+                                    <td>{{ workout.exercise.name}}</td>
+                                    <td>{{ workout.number_of_sets}}</td>
+                                    <td>{{ workout.reps_per_set}}</td>
+                                    <td>{{ workout.weight_lifted_lbs}}</td>
+                                    <td>{{ workout.goal_met}}</td>
                             </tr>
                             {% endfor %}
                         </tbody>

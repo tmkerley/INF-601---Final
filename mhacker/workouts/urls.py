@@ -27,6 +27,6 @@ urlpatterns = [
     
     path('workoutpage/', views.workoutPage, name="workoutPage"),
     path('workout/Add-Workout/', views.addWorkout, name="addWorkout"),
-    path('workout/update-workout/', views.updateWorkout, name="updateWorkout"),
-    path('workout/delete-workout/', views.deleteWorkout, name="deleteWorkout"),
+    path('workout/update-workout/<int:workout_id>/', views.updateWorkout, name="updateWorkout"),
+    path('workout/delete-workout/<int:workout_id>/', views.deleteWorkout, name="deleteWorkout"),
 ]

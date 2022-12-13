@@ -36,11 +36,10 @@ def SingleExerciseView(request, exercise_id):
     except Exercise.DoesNotExist:
         raise Http404("Exercise does not exist.")
 
-    site_title = singleExercise.name
     context = {
         'exercise':singleExercise, 
         'exercises':Exercise.objects.all(), 
-        'site-title':"Exercise Details",
+        'site-title':singleExercise.name,
         'user':request.user,
     }
     
@@ -87,10 +86,20 @@ def addWorkout(request):
     }
     return render(request, 'workouts/workoutform.html', context)
 
-@login_required
-def updateWorkout(request, pk):
-    workout = Workout_actual.objects.get(id=pk)
-    form = workoutForm()
+@login_required(login_url='loginPage')
+def updateWorkout(request, workout_id):
+    # fills the form witht he selected workout
+    selectWorkout = Workout_actual.objects.get(id=workout_id)
+    form = workoutForm(instance=selectWorkout)
+
+    # if the submit hit, updates entry into database
+    if request.method == 'POST':
+        selectWorkout.exercise = Exercise.objects.get(id=request.POST["exercise"])
+        selectWorkout.reps_per_set = request.POST["reps_per_set"]
+        selectWorkout.weight_lifted_lbs = request.POST["weight_lifted_lbs"]
+        selectWorkout.number_of_sets = request.POST["number_of_sets"]
+        selectWorkout.save()
+        return redirect('workoutPage')
 
     context = {
         'page':"UpdateWorkout", 
@@ -99,13 +108,19 @@ def updateWorkout(request, pk):
     }
     return render(request, 'workouts/workoutform.html', context)
 
-@login_required
-def deleteWorkout(request, pk):
-    form = workoutForm()
+@login_required(login_url='loginPage')
+def deleteWorkout(request, workout_id):
+    selectWorkout = Workout_actual.objects.get(id=workout_id)
+
+    if request.method == 'POST':
+        Workout_actual.objects.delete(
+            id = workout.id,
+        )
+        return redirect('workoutPage')
 
     context = {
-        'page':"UpdateWorkout", 
-        'site_title':"Update Workout",
+        'page':"DeleteWorkout", 
+        'site_title':"Delete Workout",
         'form':form,
     }
     return render(request, 'workouts/workoutform.html', context)

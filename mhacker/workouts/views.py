@@ -105,25 +105,17 @@ def updateWorkout(request, workout_id):
         'page':"UpdateWorkout", 
         'site_title':"Update Workout",
         'form':form,
+        'wID':workout_id,
     }
     return render(request, 'workouts/workoutform.html', context)
 
 @login_required(login_url='loginPage')
 def deleteWorkout(request, workout_id):
     selectWorkout = Workout_actual.objects.get(id=workout_id)
-
     if request.method == 'POST':
-        Workout_actual.objects.delete(
-            id = workout.id,
-        )
+        selectWorkout.delete()
         return redirect('workoutPage')
-
-    context = {
-        'page':"DeleteWorkout", 
-        'site_title':"Delete Workout",
-        'form':form,
-    }
-    return render(request, 'workouts/workoutform.html', context)
+    return render(request, 'workouts/workoutform.html')
 
 @login_required
 def planDisplay(request):

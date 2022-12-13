@@ -2,8 +2,9 @@
 
 {% block Sidebar %}
 {% endblock %}
+
 {% block workoutTables %}
-<form method="POST" action="">
+<form method="POST" action="{% url 'updateWorkout' wID %}">
     {% csrf_token %}
     <h1 class="h3 mb-3 fw-normal">
         {{ site_title }}
@@ -24,12 +25,37 @@
             <button class="btn btn-success" type="submit">    
                 Update
             </button>
-            <br>
-            <br>
-            <button class="btn btn-danger" type="submit">
-                Delete
-            </button>
         {% endif %}
     {% endif %}
 </form>
+<form method="POST" action="{% url 'deleteWorkout' wID %}">
+    {% csrf_token %}
+    <br>
+    <br>
+    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Delete
+    </button>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content text-bg-dark bg-dark">
+                <div class="modal-header">
+                    <h1 class="modal-title  fs-5" id="staticBackdropLabel">
+                        Confirm Deletion
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Do you really want to remove this workout from your records? Once performed, you cannot recover it.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

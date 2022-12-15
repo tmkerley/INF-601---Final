@@ -1,5 +1,6 @@
 12.15.22
 FIXED - removed workout_goal temporarily 
+FIXED - Refactored fixtureUpdater.py
 
 make equipment a separate table
 make muscles a separate table

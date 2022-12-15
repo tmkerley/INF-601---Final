@@ -9,14 +9,33 @@ import requests, json
 from pathlib import Path
 from os import stat
 
+# file name and path are distinct variables for customization
+FILENAME = "fixtures.JSON"
+FILEPATH = Path.cwd() / "Fixtures/"
+# Constant for muscles from API-Ninja's acceptable list
+MUSCLES = {
+    'abdominals',
+    'abductors',
+    'adductors',
+    'biceps',
+    'calves',
+    'chest',
+    'forearms',
+    'glutes',
+    'hamstrings',
+    'lats',
+    'lower_back',
+    'middle_back',
+    'neck',
+    'quadriceps',
+    'traps',
+    'triceps',
+}
 
 # function to open fixture file
-def loadFile():
-    fileName = "fixtures.JSON"
-    filePath = Path.cwd() / "Fixtures/"
-
+def loadFixtureFile():
     # sets the file path
-    file = filePath / Path(fileName)
+    file = FILEPATH / Path(FILENAME)
 
     # if file exists load file, else create it
     if file.is_file():
@@ -44,11 +63,9 @@ def loadFile():
 
     return data
 
-def writeToFile(data):
-    # file name and path are separate for future editing
-    fileName = "fixtures.JSON"
-    filePath = Path.cwd() / "Fixtures/"
-    file = filePath / Path(fileName)
+# writes given data to fixture file
+def writeToFxitureFile(data):
+    file = FILEPATH / Path(FILENAME)
 
     # file writing 
     activefile = open(file, "w")
@@ -56,29 +73,9 @@ def writeToFile(data):
     activefile.close()
     print("Data written.")
     return
-    
-# Constant for muscles from API-Ninja's acceptable list
-MUSCLES = {
-    'abdominals',
-    'abductors',
-    'adductors',
-    'biceps',
-    'calves',
-    'chest',
-    'forearms',
-    'glutes',
-    'hamstrings',
-    'lats',
-    'lower_back',
-    'middle_back',
-    'neck',
-    'quadriceps',
-    'traps',
-    'triceps',
-}
 
 # loads fixture data as a python object
-fixtureContent = loadFile()
+fixtureContent = loadFixtureFile()
 
 existingExerciseCount = len(fixtureContent)
 print(str(existingExerciseCount) + " exercises exist.")
@@ -101,6 +98,7 @@ for muscle in MUSCLES:
     for i in newList:
         newExercise = True
 
+        # empty records check
         if len(fixtureContent) != 0:
             # looks for new exercise
             for j in fixtureContent:
@@ -117,13 +115,9 @@ for muscle in MUSCLES:
             existingExerciseCount += 1
             fixtureContent.append(i)
             print("Writing new exercise: " + i['name'])
-    
-
-print(fixtureContent)
 
 print(str(len(fixtureContent)) + " is the new total.")
-
 print("Data written, closing file...")
 
 # converts python Object to JSON, saves, and closes it
-writeToFile(json.dumps(fixtureContent))
+writeToFxitureFile(json.dumps(fixtureContent))

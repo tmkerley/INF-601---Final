@@ -5,11 +5,8 @@ from django.contrib.auth.models import User
 
 class Exercise(models.Model):
     name = models.CharField()
-    
-    aType = models.CharField()
-    # TODO make muscles a separate table
+    aType = models.CharField(blank=True)
     muscles = models.CharField()
-    # TODO make equipment a separate table
     equipment = models.CharField()
     difficulty = models.CharField()
     instructions = models.CharField()
@@ -25,7 +22,6 @@ class Workout_actual(models.Model):
     # goal_workout_id = models.ForeignKey(
     #     Workout_goal, on_delete=models.CASCADE)
     time_of_workout = models.DateTimeField(auto_now_add=True)
-
     goal_met = models.BooleanField(default=False, null=True)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     number_of_sets = models.IntegerField(null=True, blank=True)

@@ -1,3 +1,26 @@
+12.14.22
+FIXED - Add fixtures
+FIXED - Add exercise API updater
+FIXED - Add readme.txt
+FIXED - Add requirements.txt
+
+make equipment a separate table
+make muscles a separate table
+make aType translation in fixtures loader.
+make the date displayed to be local timezone to the user
+change message pop up to be a modal
+add sort/filter features to workouts
+add create workout plan page.
+add exercise search feature to expand. 
+add muscle model
+fix small screen Navbar
+Add master goals met functionality to workout page
+Add carido vs weights based workout intelligence
+
+12.12.22
+FIXED - make delete workout a modal
+FIXED - make workouts have a link to update/delete (table rows cannot be links in themselves)
+
 12.11.22
 FIXED - Exercise should be a drop down (used a form class)
 FIXED - look into turning workoutadd into a custom form creation class like 
@@ -8,16 +31,6 @@ FIXED - display workouts table of a user (was incorrectly using the id of the
 FIXED - Add socials svgs to footer (Generic svgs from https://icons8.com/ )
 FIXED - layout of homepage, not proportioned and remove border of sidebar 
     (border removed, but layout is eh)
-
-make the date displayed to be local timezone to the user
-change message pop up to be a modal
-add sort/filter features to workouts
-add create workout plan page.
-add exercise search feature to expand. 
-add muscle model
-fix small screen Navbar
-Add master goals met functionality to workout page
-Add carido vs weights based workout intelligence
 
 12.10.22
 FIXED - fix login error (html was referencing the wrong name="")

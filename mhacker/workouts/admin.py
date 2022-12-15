@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from django.contrib import admin
 
-from .models import Exercise, Workout_actual, Workout_goal
+from .models import Exercise, Workout_actual # Workout_goal
 
 class ExerciseListAdmin(admin.TabularInline):
     name = Exercise.name
@@ -28,7 +28,7 @@ class WorkoutActualListAdmin(admin.TabularInline):
     # distance is record in miles
     miles_traveled = Workout_actual.miles_traveled
 
-class WorkoutGoalListAdmin(admin.TabularInline):
+""" class WorkoutGoalListAdmin(admin.TabularInline):
     user = Workout_goal.user
     exercise = Workout_goal.exercise
     number_of_sets = Workout_goal.number_of_sets
@@ -39,8 +39,8 @@ class WorkoutGoalListAdmin(admin.TabularInline):
     # speed is recorded in mph
     average_speed_mph = Workout_goal.average_speed_mph
     # distance is record in miles
-    miles_traveled = Workout_goal.miles_traveled
+    miles_traveled = Workout_goal.miles_traveled """
 
 admin.site.register(Exercise)
 admin.site.register(Workout_actual)
-admin.site.register(Workout_goal)
+# admin.site.register(Workout_goal)

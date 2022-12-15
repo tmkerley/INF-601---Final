@@ -4,12 +4,12 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 class Exercise(models.Model):
-    name = models.CharField()
-    aType = models.CharField(blank=True)
-    muscles = models.CharField()
-    equipment = models.CharField()
-    difficulty = models.CharField()
-    instructions = models.CharField()
+    name = models.CharField(max_length=128)
+    aType = models.CharField(blank=True, max_length=128)
+    muscles = models.CharField(max_length=128)
+    equipment = models.CharField(max_length=128)
+    difficulty = models.CharField(max_length=128)
+    instructions = models.CharField(max_length=1028)
 
     class Meta:
         ordering = ["-name"]

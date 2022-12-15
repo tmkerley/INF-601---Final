@@ -1,8 +1,5 @@
-12.14.22
-FIXED - Add fixtures
-FIXED - Add exercise API updater
-FIXED - Add readme.txt
-FIXED - Add requirements.txt
+12.15.22
+FIXED - removed workout_goal temporarily 
 
 make equipment a separate table
 make muscles a separate table
@@ -16,6 +13,12 @@ add muscle model
 fix small screen Navbar
 Add master goals met functionality to workout page
 Add carido vs weights based workout intelligence
+
+12.14.22
+FIXED - Add fixtures
+FIXED - Add exercise API updater
+FIXED - Add readme.txt
+FIXED - Add requirements.txt
 
 12.12.22
 FIXED - make delete workout a modal

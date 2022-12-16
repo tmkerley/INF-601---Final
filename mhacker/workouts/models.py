@@ -6,10 +6,10 @@ from django.contrib.auth.models import User
 class Exercise(models.Model):
     name = models.CharField(max_length=128)
     aType = models.CharField(blank=True, max_length=128)
-    muscles = models.CharField(max_length=128)
-    equipment = models.CharField(max_length=128)
-    difficulty = models.CharField(max_length=128)
-    instructions = models.CharField(max_length=1028)
+    muscles = models.CharField(max_length=128, null=True, blank=True)
+    equipment = models.CharField(max_length=128,null=True, blank=True)
+    difficulty = models.CharField(max_length=128, null=True, blank=True)
+    instructions = models.CharField(max_length=1028, null=True, blank=True)
 
     class Meta:
         ordering = ["-name"]

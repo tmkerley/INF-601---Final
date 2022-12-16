@@ -1,10 +1,10 @@
 12.15.22
 FIXED - removed workout_goal temporarily 
 FIXED - Refactored fixtureUpdater.py
+FIXED - make aType translation in fixtures loader.
 
 make equipment a separate table
 make muscles a separate table
-make aType translation in fixtures loader.
 make the date displayed to be local timezone to the user
 change message pop up to be a modal
 add sort/filter features to workouts

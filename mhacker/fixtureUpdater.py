@@ -74,6 +74,19 @@ def writeToFxitureFile(data):
     print("Data written.")
     return
 
+def apiTypeFormatChange (apiList):
+    for entry in apiList:
+        if 'type' in entry:
+            # assign type to temp
+            tempTypeValue = entry["type"]
+            # delete dictionary type entry
+            entry.pop("type")
+            # add dictionary aType entry with temp
+            entry['aType'] = tempTypeValue
+    
+    print("Types Updated...")
+    return apiList
+
 # loads fixture data as a python object
 fixtureContent = loadFixtureFile()
 
@@ -117,6 +130,7 @@ for muscle in MUSCLES:
             print("Writing new exercise: " + i['name'])
 
 print(str(len(fixtureContent)) + " is the new total.")
+apiTypeFormatChange(fixtureContent)
 print("Data written, closing file...")
 
 # converts python Object to JSON, saves, and closes it

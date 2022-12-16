@@ -11,7 +11,7 @@ from os import stat
 
 # file name and path are distinct variables for customization
 FILENAME = "fixtures.JSON"
-FILEPATH = Path.cwd() / "Fixtures/"
+FILEPATH = Path.cwd() / "workouts/fixtures/"
 # Constant for muscles from API-Ninja's acceptable list
 MUSCLES = {
     'abdominals',
